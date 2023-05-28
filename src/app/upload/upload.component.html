@@ -1,0 +1,21 @@
+<div>
+    <h2>Video Upload</h2>
+    <div>
+      <button (click)="startRecording()" [disabled]="recording">Start Recording</button>
+      <button (click)="stopRecording()" [disabled]="!recording || timer > 0">Stop Recording</button>
+      <button (click)="flipCamera()" [disabled]="recording">Flip Camera</button>
+    </div>
+    <video #videoPlayer></video>
+    <div *ngIf="recording">
+      <span>Recording: {{ timer }}</span>
+    </div>
+    <div *ngIf="uploading">
+      <span>Uploading: {{ uploadProgress }}%</span>
+    </div>
+    <div *ngIf="errorMessage">
+      <span>{{ errorMessage }}</span>
+    </div>
+    <input type="file" (change)="handleFileInput($event)" [disabled]="recording || uploading">
+    <button (click)="uploadFile()" [disabled]="recording || uploading || !selectedFile">Upload</button>
+  </div>
+  
